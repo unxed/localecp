@@ -2,8 +2,6 @@
 
 `localecp` (Locale Codepage) is a zero-dependency Go micro-library that deduces active legacy system codepages (OEM and ANSI) based on the host operating system's locale.
 
-It provides a clean, independent way of managing character set translation without any bindings to a specific archive container format.
-
 ## Features
 
 * **Platform-Aware:** Detects system locales on Unix/macOS (via `LANG`/`LC_ALL` variables) and Windows (using `GetACP` and `GetOEMCP` API calls).
