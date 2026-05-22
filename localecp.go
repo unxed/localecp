@@ -52,7 +52,7 @@ var lcToOemTable = map[string]string{
 	"sv_SE": "IBM850", "sv_FI": "IBM850", "sw_KE": "IBM437", "th_TH": "TIS-620",
 	"tr_TR": "IBM857", "tt_RU": "IBM866", "uk_UA": "IBM866", "ur_PK": "IBM720",
 	"uz_UZ@cyrillic": "IBM866", "uz_UZ": "IBM857", "vi_VN": "WINDOWS-1258",
-	"wa_BE": "IBM850", "zh_HK": "BIG5-HKSCS", "zh_SG": "GBK",
+"wa_BE": "IBM850", "zh_HK": "BIG5", "zh_SG": "GBK", "zh_MO": "BIG5",
 }
 
 var lcToAnsiTable = map[string]string{
@@ -63,7 +63,7 @@ var lcToAnsiTable = map[string]string{
 	"ar_YE": "WINDOWS-1256", "ast_ES": "WINDOWS-1252", "az_AZ@cyrillic": "WINDOWS-1251", "az_AZ": "WINDOWS-1254",
 	"be_BY": "WINDOWS-1251", "bg_BG": "WINDOWS-1251", "br_FR": "WINDOWS-1252", "ca_ES": "WINDOWS-1252",
 	"zh_CN": "GBK", "zh_TW": "BIG5", "kw_GB": "WINDOWS-1252", "cs_CZ": "WINDOWS-1250",
-	"cy_GB": "WINDOWS-1252", "da_DK": "WINDOWS-1252", "de_AT": "WINDOWS-1252", "de_LI": "WINDOWS-1252",
+"cy_GB": "ISO-8859-4", "da_DK": "WINDOWS-1252", "de_AT": "WINDOWS-1252", "de_LI": "WINDOWS-1252",
 	"de_LU": "WINDOWS-1252", "de_CH": "WINDOWS-1252", "de_DE": "WINDOWS-1252", "el_GR": "WINDOWS-1253",
 	"en_AU": "WINDOWS-1252", "en_CA": "WINDOWS-1252", "en_GB": "WINDOWS-1252", "en_IE": "WINDOWS-1252",
 	"en_JM": "WINDOWS-1252", "en_BZ": "WINDOWS-1252", "en_PH": "WINDOWS-1252", "en_ZA": "WINDOWS-1252",
@@ -79,7 +79,7 @@ var lcToAnsiTable = map[string]string{
 	"gv_IM": "WINDOWS-1252", "gl_ES": "WINDOWS-1252", "he_IL": "WINDOWS-1255", "hr_HR": "WINDOWS-1250",
 	"hu_HU": "WINDOWS-1250", "id_ID": "WINDOWS-1252", "is_IS": "WINDOWS-1252", "it_IT": "WINDOWS-1252",
 	"it_CH": "WINDOWS-1252", "iv_IV": "WINDOWS-1252", "ja_JP": "CP932", "kk_KZ": "WINDOWS-1251",
-	"ko_KR": "CP949", "ky_KG": "WINDOWS-1251", "lt_LT": "WINDOWS-1257", "lv_LV": "WINDOWS-1257",
+"ko_KR": "CP949", "ky_KG": "WINDOWS-1251", "lt_LT": "WINDOWS-1251", "lv_LV": "WINDOWS-1257",
 	"mk_MK": "WINDOWS-1251", "mn_MN": "WINDOWS-1251", "ms_BN": "WINDOWS-1252", "ms_MY": "WINDOWS-1252",
 	"nl_BE": "WINDOWS-1252", "nl_NL": "WINDOWS-1252", "nl_SR": "WINDOWS-1252", "nn_NO": "WINDOWS-1252",
 	"nb_NO": "WINDOWS-1252", "pl_PL": "WINDOWS-1250", "pt_BR": "WINDOWS-1252", "pt_PT": "WINDOWS-1252",
@@ -88,7 +88,7 @@ var lcToAnsiTable = map[string]string{
 	"sv_SE": "WINDOWS-1252", "sv_FI": "WINDOWS-1252", "sw_KE": "WINDOWS-1252", "th_TH": "WINDOWS-874",
 	"tr_TR": "WINDOWS-1254", "tt_RU": "WINDOWS-1251", "uk_UA": "WINDOWS-1251", "ur_PK": "WINDOWS-1256",
 	"uz_UZ@cyrillic": "WINDOWS-1251", "uz_UZ": "WINDOWS-1254", "vi_VN": "WINDOWS-1258",
-	"wa_BE": "WINDOWS-1252", "zh_HK": "BIG5-HKSCS", "zh_SG": "GBK",
+"wa_BE": "WINDOWS-1252", "zh_HK": "BIG5", "zh_SG": "GBK", "zh_MO": "WINDOWS-1252",
 }
 
 func getEncodingByName(name string) encoding.Encoding {
@@ -113,6 +113,7 @@ func getEncodingByName(name string) encoding.Encoding {
 	case "WINDOWS-1257", "windows-1257": return charmap.Windows1257
 	case "WINDOWS-1258", "windows-1258": return charmap.Windows1258
 	case "WINDOWS-874", "windows-874", "TIS-620": return charmap.Windows874
+	case "ISO-8859-4", "iso-8859-4": return charmap.ISO8859_4
 	}
 
 	htmlName := name
