@@ -15,6 +15,10 @@ var (
 	SystemDecoder *encoding.Decoder = charmap.CodePage437.NewDecoder()
 )
 
+func init() {
+	initSystemLocales()
+}
+
 var lcToOemTable = map[string]string{
 	"af_ZA": "IBM850", "ar_SA": "IBM720", "ar_LB": "IBM720", "ar_EG": "IBM720",
 	"ar_DZ": "IBM720", "ar_BH": "IBM720", "ar_IQ": "IBM720", "ar_JO": "IBM720",
@@ -88,21 +92,33 @@ var lcToAnsiTable = map[string]string{
 }
 
 func getEncodingByName(name string) encoding.Encoding {
+	switch name {
+	case "IBM437", "cp437": return charmap.CodePage437
+	case "IBM850", "cp850": return charmap.CodePage850
+	case "IBM852", "cp852": return charmap.CodePage852
+	case "IBM855", "cp855": return charmap.CodePage855
+	case "IBM862", "cp862": return charmap.CodePage862
+	case "IBM866", "cp866": return charmap.CodePage866
+	case "IBM720": return charmap.Windows1256 // Fallback
+	case "IBM737": return charmap.Windows1253 // Fallback
+	case "IBM775": return charmap.Windows1257 // Fallback
+	case "IBM857": return charmap.Windows1254 // Fallback
+	case "WINDOWS-1250", "windows-1250": return charmap.Windows1250
+	case "WINDOWS-1251", "windows-1251": return charmap.Windows1251
+	case "WINDOWS-1252", "windows-1252": return charmap.Windows1252
+	case "WINDOWS-1253", "windows-1253": return charmap.Windows1253
+	case "WINDOWS-1254", "windows-1254": return charmap.Windows1254
+	case "WINDOWS-1255", "windows-1255": return charmap.Windows1255
+	case "WINDOWS-1256", "windows-1256": return charmap.Windows1256
+	case "WINDOWS-1257", "windows-1257": return charmap.Windows1257
+	case "WINDOWS-1258", "windows-1258": return charmap.Windows1258
+	case "WINDOWS-874", "windows-874", "TIS-620": return charmap.Windows874
+	}
+
 	htmlName := name
 	switch name {
-	case "IBM437": htmlName = "cp437"
-	case "IBM850": htmlName = "cp850"
-	case "IBM852": htmlName = "cp852"
-	case "IBM866": htmlName = "cp866"
-	case "IBM862": htmlName = "cp862"
-	case "IBM720": htmlName = "windows-1256"
-	case "IBM737": htmlName = "windows-1253"
-	case "IBM775": htmlName = "windows-1257"
-	case "IBM857": htmlName = "windows-1254"
-	case "IBM855": htmlName = "cp855"
 	case "CP932": htmlName = "shift_jis"
 	case "CP949": htmlName = "euc-kr"
-	case "TIS-620": htmlName = "windows-874"
 	}
 	enc, err := htmlindex.Get(htmlName)
 	if err == nil {

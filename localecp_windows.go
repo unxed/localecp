@@ -6,11 +6,9 @@ package localecp
 import (
 	"fmt"
 	"syscall"
-
-	"golang.org/x/text/encoding/htmlindex"
 )
 
-func init() {
+func initSystemLocales() {
 	kernel32 := syscall.NewLazyDLL("kernel32.dll")
 	getACP := kernel32.NewProc("GetACP")
 	getOEMCP := kernel32.NewProc("GetOEMCP")

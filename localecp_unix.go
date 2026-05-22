@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func init() {
+func initSystemLocales() {
 	lc := os.Getenv("LC_ALL")
 	if lc == "" {
 		lc = os.Getenv("LC_CTYPE")
