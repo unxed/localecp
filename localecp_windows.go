@@ -6,6 +6,8 @@ package localecp
 import (
 	"fmt"
 	"syscall"
+
+	"golang.org/x/text/encoding/htmlindex"
 )
 
 func initSystemLocales() {
