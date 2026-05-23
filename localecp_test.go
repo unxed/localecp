@@ -1,6 +1,7 @@
 package localecp
 
 import (
+	"bytes"
 	"testing"
 )
 
@@ -72,5 +73,22 @@ func TestDecoding_ActualBytes(t *testing.T) {
 	}
 	if string(decoded1251) != "Привет" {
 		t.Errorf("expected Привет, got %s", string(decoded1251))
+	}
+}
+func TestEncoding_ActualBytes(t *testing.T) {
+	// Test CP1251 encoding
+	cp1251Enc := getEncodingByName("WINDOWS-1251")
+	if cp1251Enc == nil {
+		t.Fatal("WINDOWS-1251 not found")
+	}
+	encoder := cp1251Enc.NewEncoder()
+	// "Привет" in Windows-1251: 0xcf, 0xf0, 0xe8, 0xe2, 0xe5, 0xf2
+	encoded, err := encoder.Bytes([]byte("Привет"))
+	if err != nil {
+		t.Fatalf("failed to encode Windows-1251: %v", err)
+	}
+	expected := []byte{0xcf, 0xf0, 0xe8, 0xe2, 0xe5, 0xf2}
+	if !bytes.Equal(encoded, expected) {
+		t.Errorf("expected %v, got %v", expected, encoded)
 	}
 }
