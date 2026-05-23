@@ -40,3 +40,37 @@ func TestGetEncodingByName_Fallback(t *testing.T) {
 		t.Error("expected nil for unknown codepage, got valid encoding")
 	}
 }
+
+func TestDecoding_ActualBytes(t *testing.T) {
+	// Test CP866 decoding
+	cp866Enc := getEncodingByName("IBM866")
+	if cp866Enc == nil {
+		t.Fatal("IBM866 not found")
+	}
+	dec := cp866Enc.NewDecoder()
+	// "Привет" in CP866: 0x8f, 0xe0, 0xa8, 0xa2, 0xa5, 0xe2
+	raw := []byte{0x8f, 0xe0, 0xa8, 0xa2, 0xa5, 0xe2}
+	decoded, err := dec.Bytes(raw)
+	if err != nil {
+		t.Fatalf("failed to decode CP866: %v", err)
+	}
+	if string(decoded) != "Привет" {
+		t.Errorf("expected Привет, got %s", string(decoded))
+	}
+
+	// Test Windows-1251 decoding
+	cp1251Enc := getEncodingByName("WINDOWS-1251")
+	if cp1251Enc == nil {
+		t.Fatal("WINDOWS-1251 not found")
+	}
+	dec1251 := cp1251Enc.NewDecoder()
+	// "Привет" in Windows-1251: 0xcf, 0xf0, 0xe8, 0xe2, 0xe5, 0xf2
+	raw1251 := []byte{0xcf, 0xf0, 0xe8, 0xe2, 0xe5, 0xf2}
+	decoded1251, err := dec1251.Bytes(raw1251)
+	if err != nil {
+		t.Fatalf("failed to decode Windows-1251: %v", err)
+	}
+	if string(decoded1251) != "Привет" {
+		t.Errorf("expected Привет, got %s", string(decoded1251))
+	}
+}
