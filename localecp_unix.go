@@ -34,6 +34,7 @@ func initSystemLocales() {
 	if ansi, ok := lcToAnsiTable[lcBase]; ok {
 		if enc := getEncodingByName(ansi); enc != nil {
 			ANSIDecoder = enc.NewDecoder()
+			ANSIEncoder = enc.NewEncoder()
 		}
 	}
 }

@@ -11,6 +11,8 @@ var (
 	OEMDecoder *encoding.Decoder = charmap.CodePage437.NewDecoder()
 	// ANSIDecoder is the deduced legacy Windows/ANSI decoder for the current system locale
 	ANSIDecoder *encoding.Decoder = charmap.Windows1252.NewDecoder()
+	// ANSIEncoder is the deduced legacy Windows/ANSI encoder for the current system locale
+	ANSIEncoder *encoding.Encoder = charmap.Windows1252.NewEncoder()
 	// SystemDecoder is the default system fallback decoder
 	SystemDecoder *encoding.Decoder = charmap.CodePage437.NewDecoder()
 )
