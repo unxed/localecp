@@ -41,6 +41,17 @@ func TestGetEncodingByName_Fallback(t *testing.T) {
 		t.Error("expected nil for unknown codepage, got valid encoding")
 	}
 }
+func TestGetEncodingByName_SpecificMappings(t *testing.T) {
+	if getEncodingByName("CP932") == nil {
+		t.Error("Expected CP932 to resolve to shift_jis")
+	}
+	if getEncodingByName("CP949") == nil {
+		t.Error("Expected CP949 to resolve to euc-kr")
+	}
+	if getEncodingByName("IBM720") == nil {
+		t.Error("Expected IBM720 to resolve to Windows1256 fallback")
+	}
+}
 
 func TestDecoding_ActualBytes(t *testing.T) {
 	// Test CP866 decoding

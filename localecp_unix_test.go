@@ -36,3 +36,27 @@ func TestInitSystemLocales_Unix_Env(t *testing.T) {
 		t.Error("expected ANSIDecoder to be set")
 	}
 }
+
+func TestInitSystemLocales_Unix_POSIX(t *testing.T) {
+	origLang := os.Getenv("LANG")
+	origLcAll := os.Getenv("LC_ALL")
+	origLcCtype := os.Getenv("LC_CTYPE")
+
+	defer func() {
+		os.Setenv("LANG", origLang)
+		os.Setenv("LC_ALL", origLcAll)
+		os.Setenv("LC_CTYPE", origLcCtype)
+	}()
+
+	// Тестируем fallback для C/POSIX локали
+	os.Setenv("LC_ALL", "POSIX")
+	os.Setenv("LC_CTYPE", "")
+	os.Setenv("LANG", "")
+
+	oldOEM := OEMDecoder
+	initSystemLocales()
+
+	if OEMDecoder != oldOEM {
+		t.Error("OEMDecoder should not change for POSIX locale")
+	}
+}
