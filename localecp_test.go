@@ -5,6 +5,15 @@ import (
 	"testing"
 )
 
+func TestDefaultEncodings(t *testing.T) {
+	if OEMEncoding == nil {
+		t.Error("expected OEMEncoding to be initialized")
+	}
+	if ANSIEncoding == nil {
+		t.Error("expected ANSIEncoding to be initialized")
+	}
+}
+
 func TestDefaultDecoders(t *testing.T) {
 	if OEMDecoder == nil {
 		t.Error("expected OEMDecoder to be initialized")

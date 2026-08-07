@@ -19,12 +19,14 @@ func initSystemLocales() {
 		if enc, err := htmlindex.Get(fmt.Sprintf("windows-%d", acp)); err == nil {
 			ANSIDecoder = enc.NewDecoder()
 			ANSIEncoder = enc.NewEncoder()
+			ANSIEncoding = enc
 		}
 	}
 	if oemcp, _, _ := getOEMCP.Call(); oemcp != 0 {
 		if enc, err := htmlindex.Get(fmt.Sprintf("cp%d", oemcp)); err == nil {
 			OEMDecoder = enc.NewDecoder()
 			SystemDecoder = OEMDecoder
+			OEMEncoding = enc
 		}
 	}
 }

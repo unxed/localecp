@@ -16,6 +16,12 @@ func TestInitSystemLocales_Windows(t *testing.T) {
 		t.Error("expected ANSIDecoder to be set on Windows")
 	}
 	if OEMDecoder == nil {
+		if OEMEncoding == nil {
+			t.Error("expected OEMEncoding to be set on Windows")
+		}
+		if ANSIEncoding == nil {
+			t.Error("expected ANSIEncoding to be set on Windows")
+		}
 		t.Error("expected OEMDecoder to be set on Windows")
 	}
 }

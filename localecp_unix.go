@@ -29,12 +29,14 @@ func initSystemLocales() {
 		if enc := getEncodingByName(oem); enc != nil {
 			OEMDecoder = enc.NewDecoder()
 			SystemDecoder = OEMDecoder
+			OEMEncoding = enc
 		}
 	}
 	if ansi, ok := lcToAnsiTable[lcBase]; ok {
 		if enc := getEncodingByName(ansi); enc != nil {
 			ANSIDecoder = enc.NewDecoder()
 			ANSIEncoder = enc.NewEncoder()
+			ANSIEncoding = enc
 		}
 	}
 }

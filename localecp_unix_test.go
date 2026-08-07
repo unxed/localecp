@@ -33,6 +33,12 @@ func TestInitSystemLocales_Unix_Env(t *testing.T) {
 		t.Error("expected OEMDecoder to be set")
 	}
 	if ANSIDecoder == nil {
+		if OEMEncoding == nil {
+			t.Error("expected OEMEncoding to be set")
+		}
+		if ANSIEncoding == nil {
+			t.Error("expected ANSIEncoding to be set")
+		}
 		t.Error("expected ANSIDecoder to be set")
 	}
 }

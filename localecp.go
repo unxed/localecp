@@ -15,6 +15,10 @@ var (
 	ANSIEncoder *encoding.Encoder = charmap.Windows1252.NewEncoder()
 	// SystemDecoder is the default system fallback decoder
 	SystemDecoder *encoding.Decoder = charmap.CodePage437.NewDecoder()
+	// OEMEncoding is the deduced legacy DOS/OEM encoding for the current system locale
+	OEMEncoding encoding.Encoding = charmap.CodePage437
+	// ANSIEncoding is the deduced legacy Windows/ANSI encoding for the current system locale
+	ANSIEncoding encoding.Encoding = charmap.Windows1252
 )
 
 func init() {
