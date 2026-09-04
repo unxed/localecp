@@ -19,6 +19,16 @@ var (
 	OEMEncoding encoding.Encoding = charmap.CodePage437
 	// ANSIEncoding is the deduced legacy Windows/ANSI encoding for the current system locale
 	ANSIEncoding encoding.Encoding = charmap.Windows1252
+
+	// ANSICodepage and OEMCodepage are the Windows codepage numbers behind
+	// ANSIEncoding and OEMEncoding (1251, 866, ...), for callers that show
+	// or store the number rather than the encoding. On a Windows machine
+	// set to a UTF-8 system codepage they are the locale's legacy codepages
+	// (what GetACP/GetOEMCP would have said without that setting), not
+	// 65001. 0 where the platform gives no number, which is every non-Windows
+	// platform today.
+	ANSICodepage int
+	OEMCodepage  int
 )
 
 func init() {

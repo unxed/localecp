@@ -4,7 +4,8 @@
 
 ## Features
 
-* **Platform-Aware:** Detects system locales on Unix/macOS (via `LANG`/`LC_ALL` variables) and Windows (using `GetACP` and `GetOEMCP` API calls).
+* **Platform-Aware:** Detects system locales on Unix/macOS (via `LANG`/`LC_ALL` variables) and Windows (using `GetACP` and `GetOEMCP` API calls; on a machine set to a UTF-8 system codepage, where both answer 65001, the locale's legacy codepages are used instead, as Far does).
+* **Codepage Numbers:** Exposes `ANSICodepage` and `OEMCodepage` (Windows codepage numbers, 0 where the platform has none) alongside the encodings.
 * **Pre-configured Decoders:** Exposes active `OEMDecoder`, `ANSIDecoder`, and `SystemDecoder` ready to use with standard text processing.
 * **No Heavy Dependencies:** Relies solely on `golang.org/x/text`.
 
