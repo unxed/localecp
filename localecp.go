@@ -3,7 +3,6 @@ package localecp
 import (
 	"golang.org/x/text/encoding"
 	"golang.org/x/text/encoding/charmap"
-	"golang.org/x/text/encoding/htmlindex"
 )
 
 var (
@@ -153,16 +152,5 @@ func getEncodingByName(name string) encoding.Encoding {
 		return charmap.ISO8859_4
 	}
 
-	htmlName := name
-	switch name {
-	case "CP932":
-		htmlName = "shift_jis"
-	case "CP949":
-		htmlName = "euc-kr"
-	}
-	enc, err := htmlindex.Get(htmlName)
-	if err == nil {
-		return enc
-	}
-	return nil
+	return multiByteEncoding(name)
 }

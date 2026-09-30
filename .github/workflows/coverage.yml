@@ -20,6 +20,10 @@ jobs:
           cache: true
       - name: Run coverage
         run: go test -covermode=atomic -coverprofile=coverage.out ./...
+      - name: Build and test the extralite tag
+        run: |
+          go vet -tags extralite ./...
+          go test -tags extralite -run ExtraLite ./...
       - name: Report coverage
         run: go tool cover -func=coverage.out | tee coverage.txt
       - uses: actions/upload-artifact@v4
